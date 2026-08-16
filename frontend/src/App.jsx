@@ -6,9 +6,7 @@ import SearchBar from './SearchBar.jsx';
 
 function App() {
   const [data, setData] = useState('');
-  const [username, setUsername] = useState('');
-  const [enteredData, setEnteredData] = useState('');
-  const [suggestion, setSuggestion] = useState('');
+  const [colleges, setColleges] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/message')
@@ -17,27 +15,28 @@ function App() {
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
+  const addCollege = (name) => {
+    if (!colleges.includes(name)) {
+      setColleges([...colleges, name]);
+    }
+  }
 
-  
-  
 
   return (
     <div>
       <nav className="navbar">
         <p>Essay Plan Generator</p>
       </nav>
-      <SearchBar /> 
+      
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
         <h1>Essay Plan Generator</h1>
-        <p>Backend says: <strong>{data || "Loading..."}</strong></p>
+        <SearchBar onSelect={addCollege}/> 
 
+        
         <div className="college-container">
-          <CollegeBlock name="Harvard University" />
-          <CollegeBlock name="Stanford University" />
-          <CollegeBlock name="MIT" />
-          <CollegeBlock name="Caltech" />
-          <CollegeBlock name="Princeton University" />
-          <CollegeBlock name="Yale University" />
+          {colleges.map((item) => (
+            <CollegeBlock name={item} />
+          ))}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './SearchBar.css'
 
 const data = [
     'Harvard University',
@@ -9,7 +10,7 @@ const data = [
     'Yale University'
 ]
 
-export default function SearchBar() {
+export default function SearchBar({ onSelect }) {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -28,9 +29,10 @@ export default function SearchBar() {
     };
 
     const handleSelect = (suggestion) => {
-        setQuery(suggestion);
+        setQuery('');
         setSuggestions([]);
         setShowDropdown(false);
+        onSelect(suggestion);
     };
 
     const blur = () => {

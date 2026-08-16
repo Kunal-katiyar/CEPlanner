@@ -3,7 +3,7 @@
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
-  --code-bg: hsl(52, 27%, 94%);
+  --special-bg: hsl(52, 27%, 94%);
   --accent: #ffcb3b;
   --accent-bg: rgba(255, 177, 59, 0.1);
   --accent-border: rgba(255, 219, 59, 0.5);
@@ -35,7 +35,7 @@
     --text-h: #f3f4f6;
     --bg: #16171d;
     --border: #2e303a;
-    --code-bg: #1f2028;
+    --special-bg: #1f2028;
     --accent: #ffcb3b;
     --accent-bg: rgba(255, 177, 59, 0.1);
     --accent-border: rgba(255, 219, 59, 0.5);

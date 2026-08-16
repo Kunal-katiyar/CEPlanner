@@ -21,6 +21,10 @@ function App() {
     }
   }
 
+  const removeCollege = (name) => {
+    setColleges(colleges.filter((item) => item !== name));
+  }
+
 
   return (
     <div>
@@ -34,8 +38,8 @@ function App() {
 
         
         <div className="college-container">
-          {colleges.map((item) => (
-            <CollegeBlock name={item} />
+          {colleges.map((name) => (
+            <CollegeBlock collegeName={name} onDelete={removeCollege}/>
           ))}
         </div>
       </div>

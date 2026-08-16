@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 
-function CollegeBlock(details) {
+function CollegeBlock({collegeName, onDelete}) {
     return (
       <div className="college-block">
-        <p className="name">{details.name}</p>
+        <p className="name">{collegeName}</p>
         <p>Hello</p>
         <p>Hello</p>
-        <p className="delete">&times;</p>
+        <p className="delete" onClick={() => onDelete(collegeName)}>&times;</p>
       </div>  
     );
 }

@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+    position: relative;
 }
 
 .search-input {
@@ -27,6 +27,9 @@
     padding: 0px;
     width: 300px;
     margin-top: 5px;
+    position: absolute;
+    top: 100%;
+    opacity: 1;
     
     li {
         color: var(--text-h);
@@ -44,5 +47,6 @@
 
     li:hover {
         background: var(--accent-bg);
+        opacity: 1 !important;
     }
 }

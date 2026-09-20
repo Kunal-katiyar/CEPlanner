@@ -1,24 +1,55 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from "./utils/axios.js";
 import CollegeBlock from './Collegeblock.jsx';
-import './index.css';
 import SearchBar from './SearchBar.jsx';
+import './index.css';
 
 function App() {
-  const [data, setData] = useState('');
+  const [data, setData] = useState({});
   const [colleges, setColleges] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/message')
-      .then((res) => res.json())
-      .then((data) => setData(data.message))
-      .catch((err) => console.error("Error fetching data:", err));
+  const getColleges = async () => {
+    
+    const response = await fetch('/api/getSessionColleges', { method: 'POST' });
+    const received = await response.json(); 
+    
+    const tempSet = [];
+
+    for (const item of received.data) {
+      tempSet.push(item.college);
+    }
+
+    setColleges(tempSet);
+  }
+
+  useEffect(() => {  
+    getColleges();
   }, []);
 
   const addCollege = (name) => {
+    const handleInputCollege = async () => {
+      try {
+        let serializedBody = JSON.stringify({ name });
+
+        const fetchOptions = {
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json' 
+          },
+          body: serializedBody 
+        }
+        const response = await fetch('/api/addCollege', fetchOptions)
+        const received = await response.json(); 
+        setData(received);
+      } catch (error) {
+        console.log("error: " + error.message);
+      }
+    };
     if (!colleges.includes(name)) {
       setColleges([...colleges, name]);
+      handleInputCollege();
     }
+
   }
 
   const removeCollege = (name) => {
